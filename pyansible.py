@@ -44,6 +44,10 @@ variable_manager = VariableManager(loader=loader, inventory=inventory)
 
 
 mkdir_args = dict(path='/test', mode='0755', state='directory')
+mkfs_args = {
+    'dev': '/testfs',
+    'fstype': 'ext4'
+}
 
 # create data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
 play_source =  dict(
@@ -53,7 +57,8 @@ play_source =  dict(
         tasks = [
 #            dict(action=dict(module='shell', args='ls'), register='shell_out'),
 #            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
-            dict(action=dict(module='file', args=mkdir_args), register='shell_out')
+            dict(action=dict(module='file', args=mkdir_args), register='shell_out'),
+            dict(action=dict(module='filesystem ', args=mkfs_args), register='shell_out')
          ]
     )
 
