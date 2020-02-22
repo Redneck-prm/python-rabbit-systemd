@@ -1,7 +1,7 @@
 import pika
 
 def callback(ch, method, properties, body):
-    print(" [x] Received %r" % body)
+    print(" [x] Received %r" % body.decode())
 
 
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
