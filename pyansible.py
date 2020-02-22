@@ -51,8 +51,8 @@ play_source =  dict(
         hosts = 'localhost',
         gather_facts = 'no',
         tasks = [
-            dict(action=dict(module='shell', args='ls'), register='shell_out'),
-            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
+#            dict(action=dict(module='shell', args='ls'), register='shell_out'),
+#            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
             dict(action=dict(module='file', args=mkdir_args), register='shell_out')
          ]
     )
