@@ -74,7 +74,7 @@ try:
               variable_manager=variable_manager,
               loader=loader,
               passwords=passwords,
-              stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
+#              stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
           )
     result = tqm.run(play) # most interesting data for a play is actually sent to the callback's methods
 finally:
