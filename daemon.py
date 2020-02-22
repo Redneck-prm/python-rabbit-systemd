@@ -12,12 +12,13 @@ def rabbit_callback(ch, method, properties, body):
     # Tell systemd that our service is ready
     systemd.daemon.notify(systemd.daemon.Notification.READY)
 
-    while True:
-        print('Hello from the Python rabbit pull Service')
-        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-        channel = connection.channel()
-        channel.queue_declare(queue='hello')
 
-        channel.basic_consume(queue='hello',
-                            auto_ack=True,
-                            on_message_callback=rabbit_callback)
+    print('Hello from the Python rabbit pull Service')
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    channel = connection.channel()
+    channel.queue_declare(queue='hello')
+
+    channel.basic_consume(queue='hello',
+                        auto_ack=True,
+                        on_message_callback=rabbit_callback)
+    channel.start_consuming()
