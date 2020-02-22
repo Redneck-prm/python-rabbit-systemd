@@ -42,6 +42,9 @@ inventory = InventoryManager(loader=loader, sources='localhost,')
 # variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
 variable_manager = VariableManager(loader=loader, inventory=inventory)
 
+
+mkdir_args = dict(path='/test', mode='0755', state='directory')
+
 # create data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
 play_source =  dict(
         name = "Ansible Play",
@@ -49,7 +52,8 @@ play_source =  dict(
         gather_facts = 'no',
         tasks = [
             dict(action=dict(module='shell', args='ls'), register='shell_out'),
-            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}')))
+            dict(action=dict(module='debug', args=dict(msg='{{shell_out.stdout}}'))),
+            dict(action=dict(module='file', args=mkdir_args), register='shell_out')
          ]
     )
 
