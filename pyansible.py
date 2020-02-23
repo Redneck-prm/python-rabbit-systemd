@@ -17,7 +17,8 @@ class ResultCallback(CallbackBase):
     the end of the execution, look into utilizing the ``json`` callback plugin
     or writing your own custom callback plugin
     """
-    def v2_runner_on_ok(self, result, **kwargs):
+#    def v2_runner_on_ok(self, result, **kwargs):
+    def v2_on_any(self, result, **kwargs):
         """Print a json representation of the result
 
         This method could store the result in an instance attribute for retrieval later
@@ -74,7 +75,7 @@ try:
               variable_manager=variable_manager,
               loader=loader,
               passwords=passwords,
-#              stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
+              stdout_callback=results_callback,  # Use our custom callback instead of the ``default`` callback plugin, which prints to stdout
           )
     result = tqm.run(play) # most interesting data for a play is actually sent to the callback's methods
 finally:
